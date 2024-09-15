@@ -3,6 +3,7 @@ const POLL_INTERVAL = 1000;
 
 const app = document.getElementById("root");
 const sendButton = document.getElementById("send-msg");
+const updateButton = document.getElementById("get-msg");
 let currentOffset = 0;
 let messages: Message[] = [];
 
@@ -10,26 +11,6 @@ interface Message {
   id: number;
   text: string;
   timestamp: string;
-}
-
-function init() {
-  fetch(`${API_URL}/messages?OFFSET=0`)
-    .then((res) => res.json())
-    .then((data: Message[]) => {
-      if (data && data.length) {
-        messages = data;
-        const newMessage = new CustomEvent("message", {
-          detail: { messages: data },
-        });
-        app!.dispatchEvent(newMessage);
-        currentOffset = data[data.length - 1].id;
-      }
-      setInterval(pollServer, POLL_INTERVAL);
-    })
-    .catch((err) => {
-      console.error("Failed to initialize messenger:");
-      throw err;
-    });
 }
 
 function pollServer() {
@@ -67,6 +48,7 @@ function handleSend() {
   msgInput.value = "";
 }
 sendButton?.addEventListener("click", handleSend);
+updateButton?.addEventListener("click", pollServer);
 
 // @ts-ignore
 app!.addEventListener(
@@ -93,4 +75,5 @@ app!.addEventListener(
   }
 );
 
-init();
+pollServer();
+setInterval(pollServer, POLL_INTERVAL);
