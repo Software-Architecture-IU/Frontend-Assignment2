@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assignment 2 — Messenger</title>
     <link rel="stylesheet" href="main.css" />
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
   </head>
   <body>
     <div id="root">
@@ -14,7 +14,9 @@
         <button id="get-msg">Update</button>
       </header>
       <div id="msgr-wrapper">
-        <div id="msg-list"></div>
+        <div class="msg-wrap">
+          <div id="msg-list"></div>
+        </div>
         <div class="sender">
           <input
             id="msg-input"

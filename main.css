@@ -4,8 +4,12 @@ header {
   align-items: center;
 }
 
-#msg-list {
+.msg-wrap {
   display: flex;
+  flex-flow: column;
+  flex-direction: column-reverse;
+  max-height: 400px;
+  overflow-y: auto;
   background: gray;
   width: 100%;
 }
@@ -17,4 +21,9 @@ header {
   display: flex;
   gap: 1rem;
   background: lightgray;
+}
+
+.msg {
+  display: flex;
+  justify-content: space-between;
 }
