@@ -1,4 +1,6 @@
 const API_URL = "http://stress-testers.ru:8080";
+const POLL_INTERVAL = 1000;
+
 const app = document.getElementById("root");
 const sendButton = document.getElementById("send-msg");
 let currentOffset = 0;
@@ -14,13 +16,15 @@ function init() {
   fetch(`${API_URL}/messages?OFFSET=0`)
     .then((res) => res.json())
     .then((data: Message[]) => {
-      messages = data;
-      const newMessage = new CustomEvent("message", {
-        detail: { messages: data },
-      });
-      app?.dispatchEvent(newMessage);
-      currentOffset = data[data.length - 1].id;
-      setInterval(pollServer, 2000);
+      if (data && data.length) {
+        messages = data;
+        const newMessage = new CustomEvent("message", {
+          detail: { messages: data },
+        });
+        app!.dispatchEvent(newMessage);
+        currentOffset = data[data.length - 1].id;
+      }
+      setInterval(pollServer, POLL_INTERVAL);
     })
     .catch((err) => {
       console.error("Failed to initialize messenger:");
@@ -32,12 +36,14 @@ function pollServer() {
   fetch(`${API_URL}/messages?OFFSET=${currentOffset}`)
     .then((res) => res.json())
     .then((data: Message[]) => {
-      messages.concat(data);
-      const newMessage = new CustomEvent("message", {
-        detail: { messages: data },
-      });
-      app?.dispatchEvent(newMessage);
-      currentOffset = data[data.length - 1].id;
+      if (data && data.length) {
+        messages.concat(data);
+        const newMessage = new CustomEvent("message", {
+          detail: { messages: data },
+        });
+        app!.dispatchEvent(newMessage);
+        currentOffset = data[data.length - 1].id;
+      }
     })
     .catch((err) => {
       console.error("Failed to poll messages:");
@@ -63,9 +69,10 @@ function handleSend() {
 sendButton?.addEventListener("click", handleSend);
 
 // @ts-ignore
-app?.addEventListener(
+app!.addEventListener(
   "message",
   function (event: CustomEvent<{ messages: Message[] }>) {
+    console.log("aboba");
     const msgList = document.getElementById("msg-list");
     for (let msg of event.detail.messages) {
       const newMsg = document.createElement("div");
