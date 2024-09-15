@@ -1,0 +1,20 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#msg-list {
+  display: flex;
+  background: gray;
+  width: 100%;
+}
+
+#msg-input {
+  width: 100%;
+}
+.sender {
+  display: flex;
+  gap: 1rem;
+  background: lightgray;
+}
