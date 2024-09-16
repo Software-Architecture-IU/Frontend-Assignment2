@@ -4,6 +4,13 @@ const POLL_INTERVAL = 1000;
 const app = document.getElementById("root");
 const sendButton = document.getElementById("send-msg");
 const updateButton = document.getElementById("get-msg");
+
+const form = document.getElementById("sender");
+function handleForm(event: Event) {
+  event.preventDefault();
+}
+form?.addEventListener("submit", handleForm);
+
 let currentOffset = 0;
 let messages: Message[] = [];
 
@@ -50,11 +57,45 @@ function handleSend() {
 sendButton?.addEventListener("click", handleSend);
 updateButton?.addEventListener("click", pollServer);
 
+function formatTime(time: string) {
+  // 12:49 | 12 Jun 2024
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const date = new Date(time);
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  return `${date.getHours().toString().padStart(2, "0")}:${date
+    .getMinutes()
+    .toString()
+    .padStart(2, "0")} | ${day} ${month} ${year}`;
+
+  // month to locale string
+  // const month = date.toLocaleString("ru", { month: "long" });
+}
+
 // @ts-ignore
 app!.addEventListener(
   "message",
   function (event: CustomEvent<{ messages: Message[] }>) {
-    console.log("aboba");
     const msgList = document.getElementById("msg-list");
     for (let msg of event.detail.messages) {
       const newMsg = document.createElement("div");
@@ -65,7 +106,7 @@ app!.addEventListener(
       msgText.className = "msg-txt";
 
       const msgTime = document.createElement("span");
-      msgTime.appendChild(document.createTextNode(msg.timestamp));
+      msgTime.appendChild(document.createTextNode(formatTime(msg.timestamp)));
       msgTime.className = "msg-time";
 
       newMsg.appendChild(msgText);
