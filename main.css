@@ -1,3 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+body {
+  background: #1d1d1d;
+  color: #f0f0f0;
+  font-family: "Open Sans", "Trebuchet MS", Arial, sans-serif;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -8,10 +16,22 @@ header {
   display: flex;
   flex-flow: column;
   flex-direction: column-reverse;
-  max-height: 400px;
+  max-height: 600px;
   overflow-y: auto;
-  background: gray;
   width: 100%;
+}
+
+#msg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.msg {
+  background: #2d2d2d;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 
 #msg-input {
@@ -20,10 +40,64 @@ header {
 .sender {
   display: flex;
   gap: 1rem;
-  background: lightgray;
 }
 
 .msg {
   display: flex;
   justify-content: space-between;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.125rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  border: 0;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid #4d4d4d;
+  color: #f0f0f0;
+}
+.btn-secondary:hover {
+  border: 2px solid #5d5d5d;
+  cursor: pointer;
+}
+.btn-secondary:active {
+  border: 2px solid #3d3d3d;
+}
+
+#msgr-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#msg-input {
+  border-radius: 0.5rem;
+  border: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  background: #3d3d3d;
+  color: #f0f0f0;
+}
+
+body {
+  scrollbar-width: thin; /* "auto" или "thin"  */
+  scrollbar-color: #4d4d4d transparent; /* плашка скролла и дорожка */
+}
+
+#send-msg {
+  background-color: #4d4d4d;
+  color: #f0f0f0;
+}
+
+#send-msg:hover {
+  background-color: #5d5d5d;
+  cursor: pointer;
+}
+#send-msg:active {
+  background-color: #3d3d3d;
 }

@@ -11,20 +11,22 @@
     <div id="root">
       <header>
         <h1>Messenger</h1>
-        <button id="get-msg">Update</button>
+        <button class="btn btn-secondary" id="get-msg">Update</button>
       </header>
       <div id="msgr-wrapper">
         <div class="msg-wrap">
           <div id="msg-list"></div>
         </div>
-        <div class="sender">
+        <form class="sender" id="sender">
           <input
             id="msg-input"
             type="text"
             placeholder="Type your message here..."
           />
-          <button id="send-msg">Send</button>
-        </div>
+          <button class="btn btn-primary" type="submit" id="send-msg">
+            Send
+          </button>
+        </form>
       </div>
     </div>
   </body>
