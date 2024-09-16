@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript && npx serve",
     "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript"
   },
   "devDependencies": {
