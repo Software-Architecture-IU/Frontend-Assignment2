@@ -104,7 +104,7 @@ app!.addEventListener(
       newMsg.appendChild(msgTime);
       msgList?.appendChild(newMsg);
     }
-  }
+  },
 );
 
 pollServer();

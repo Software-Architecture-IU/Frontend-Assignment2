@@ -5,6 +5,7 @@ The frontend itself is an essentially concise typescript application. The source
 ### Additional Tools
 
 For the code quality, we use the eslint, which is to adjust the code for the single list of criteria and format the code as in the predefined configuration. Additionally, we use prettier to have the developer's eye code style.
+
 ### How to run the frontend?
 
 1. Install Node.js, npm.
