@@ -12,7 +12,7 @@ function handleForm(event: Event) {
 form?.addEventListener("submit", handleForm);
 
 let currentOffset = 0;
-let messages: Message[] = [];
+const messages: Message[] = [];
 
 interface Message {
   id: number;
@@ -74,12 +74,6 @@ function formatTime(time: string) {
     "Dec",
   ];
   const date = new Date(time);
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
   const day = String(date.getDate()).padStart(2, "0");
   const month = months[date.getMonth()];
   const year = date.getFullYear();
@@ -87,17 +81,14 @@ function formatTime(time: string) {
     .getMinutes()
     .toString()
     .padStart(2, "0")} | ${day} ${month} ${year}`;
-
-  // month to locale string
-  // const month = date.toLocaleString("ru", { month: "long" });
 }
 
-// @ts-ignore
+// @ts-expect-error addEventListener does not have overload with CustomEvent event type
 app!.addEventListener(
   "message",
   function (event: CustomEvent<{ messages: Message[] }>) {
     const msgList = document.getElementById("msg-list");
-    for (let msg of event.detail.messages) {
+    for (const msg of event.detail.messages) {
       const newMsg = document.createElement("div");
       newMsg.className = "msg";
 
